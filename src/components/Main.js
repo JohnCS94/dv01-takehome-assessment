@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { getData } from "../request/api";
-import Table from "./Table";
 import Chart from "./Chart";
+import Filters from "./Filters";
+import Table from "./Table";
+
+import { getData } from "../request/api";
 
 const Main = () => {
   const [aggregates, setAggregates] = useState([]);
@@ -16,13 +18,6 @@ const Main = () => {
   const [quarterOptions, setQuarterOptions] = useState(new Set());
   const [yearOptions, setYearOptions] = useState(new Set());
   const [termOptions, setTermOptions] = useState(new Set());
-
-  const handleReset = () => {
-    setHomeOwnership("");
-    setQuarter("");
-    setYear("");
-    setTerm("");
-  };
 
   const { data } = useQuery({
     queryKey: ["data", homeOwnership, quarter, year, term],
@@ -84,61 +79,25 @@ const Main = () => {
   }, [data]);
 
   return (
-    <div>
-      <select
-        value={homeOwnership}
-        onChange={(e) => setHomeOwnership(e.target.value)}
-      >
-        <option value="" disabled>
-          Select Ownership
-        </option>
-        {Array.from(homeOwnershipOptions).map((option) => {
-          return (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          );
-        })}
-      </select>
-      <select value={quarter} onChange={(e) => setQuarter(e.target.value)}>
-        <option value="" disabled>
-          Select Quarter
-        </option>
-        {Array.from(quarterOptions)
-          .sort()
-          .map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-      </select>
-      <select value={year} onChange={(e) => setYear(e.target.value)}>
-        <option value="" disabled>
-          Select Year
-        </option>
-        {Array.from(yearOptions)
-          .sort()
-          .map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-      </select>
-      <select value={term} onChange={(e) => setTerm(e.target.value)}>
-        <option value="" disabled>
-          Select Term
-        </option>
-        {Array.from(termOptions)
-          .sort()
-          .map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-      </select>
-      <button onClick={handleReset}>Reset</button>
-      <Table data={aggregates} />
-      <Chart data={aggregates} />
+    <div className="container">
+      <Filters
+        homeOwnership={homeOwnership}
+        homeOwnershipOptions={homeOwnershipOptions}
+        setHomeOwnership={setHomeOwnership}
+        quarter={quarter}
+        quarterOptions={quarterOptions}
+        setQuarter={setQuarter}
+        year={year}
+        yearOptions={yearOptions}
+        setYear={setYear}
+        term={term}
+        termOptions={termOptions}
+        setTerm={setTerm}
+      />
+      <div style={{ width: "100%" }}>
+        <Table data={aggregates} />
+        <Chart data={aggregates} />
+      </div>
     </div>
   );
 };
