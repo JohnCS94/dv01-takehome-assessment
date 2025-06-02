@@ -1,15 +1,18 @@
-import React, { Component } from 'react'
-import './App.css'
+import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <p>HELLO WORLD</p>
-        <p>CHARTS AND GRAPHS</p>
-      </div>
-    )
-  }
-}
+import Main from "./components/Main";
 
-export default App
+import "./App.css";
+
+const App = () => {
+  const queryClient = new QueryClient();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Main />
+    </QueryClientProvider>
+  );
+};
+
+export default App;
