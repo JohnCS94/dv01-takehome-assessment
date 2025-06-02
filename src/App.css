@@ -67,6 +67,7 @@ h1 {
 
 .table h2 {
   font-style: italic;
+  color: #855ffc;
 }
 
 .table-head {
@@ -91,10 +92,30 @@ h1 {
   width: calc(100% - 32px);
 }
 
+.chart h2 {
+  color: #855ffc;
+}
+
+.chart h2,
+.chart h3 {
+  font-style: italic;
+}
+
 .tooltip {
   background-color: white;
   border-radius: 12px;
   padding: 8px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  min-height: 120px;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 10px;
 }
 
 @media (max-width: 650px) {

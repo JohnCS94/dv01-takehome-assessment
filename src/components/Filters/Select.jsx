@@ -1,8 +1,13 @@
 import React from "react";
 
-const Select = ({ placeholder, options, value, onChange }) => {
+const Select = ({ testId, placeholder, options, value, onChange }) => {
   return (
-    <select className="select" value={value} onChange={onChange}>
+    <select
+      data-testid={testId}
+      className="select"
+      value={value}
+      onChange={onChange}
+    >
       <option value="" disabled>
         {placeholder}
       </option>

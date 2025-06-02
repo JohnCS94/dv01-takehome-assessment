@@ -9,7 +9,9 @@ import {
   YAxis,
 } from "recharts";
 
-const Chart = ({ data }) => {
+import LoadingBars from "./LoadingBars";
+
+const Chart = ({ data, isLoading, error }) => {
   const CustomTooltop = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -27,6 +29,24 @@ const Chart = ({ data }) => {
 
     return null;
   };
+
+  if (isLoading) return <LoadingBars />;
+
+  if (error)
+    return (
+      <div className="chart">
+        <h2>Error Retrieving Data</h2>
+      </div>
+    );
+
+  if (!data.length)
+    return (
+      <div className="chart">
+        <h2>No Data to Display</h2>
+        <h3>Try updating filters to see data</h3>
+      </div>
+    );
+
   return (
     <div className="chart">
       <h1>Aggregates Chart</h1>
