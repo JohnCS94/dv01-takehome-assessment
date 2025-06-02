@@ -32,6 +32,10 @@ const Main = () => {
   useEffect(() => {
     if (!data) return;
 
+    /**
+     * This useEffect is to make sure the filters are based off of the data
+     * fetched and not any hard coded values
+     */
     const homeOwnershipSet = new Set();
     const quarterSet = new Set();
     const yearSet = new Set();
@@ -52,6 +56,9 @@ const Main = () => {
 
   useEffect(() => {
     if (!data) return;
+    /**
+     * This useEffect handle the main sorting and aggregation functionality
+     */
 
     const mapFilters = {
       homeOwnership: filters.homeOwnership,
